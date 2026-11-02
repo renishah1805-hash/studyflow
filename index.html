@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StudyFlow – Assignment & Deadline Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar" aria-label="Main navigation">
+    <div class="logo"><span class="logo-mark">S</span>StudyFlow</div>
+    <nav>
+      <a href="#" class="nav-link active" data-status="All">📋 All assignments</a>
+      <a href="#" class="nav-link" data-status="Pending">⏳ Pending</a>
+      <a href="#" class="nav-link" data-status="Completed">✅ Completed</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="logo logo-mobile"><span class="logo-mark">S</span>StudyFlow</div>
+      <h1>Dashboard</h1>
+      <button class="btn btn-primary" id="openModal" type="button">+ Add Assignment</button>
+    </header>
+
+    <main class="content">
+      <section class="welcome">
+        <div>
+          <h2 id="welcomeText">Welcome back!</h2>
+          <p id="welcomeSub">Here is what is on your plate.</p>
+          <button class="btn btn-ghost btn-small" id="toggleSamples" type="button" style="margin-top:10px"></button>
+        </div>
+        <div class="progress-box" aria-label="Completion progress">
+          <div class="progress-label"><span>Progress</span><strong id="progressText">0%</strong></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+      </section>
+
+      <section class="cards" aria-label="Summary">
+        <div class="card"><span class="icon">📚</span><div><p>Total</p><strong id="totalCount">0</strong></div></div>
+        <div class="card"><span class="icon">⏳</span><div><p>Pending</p><strong id="pendingCount">0</strong></div></div>
+        <div class="card"><span class="icon">✅</span><div><p>Completed</p><strong id="completedCount">0</strong></div></div>
+      </section>
+
+      <section class="toolbar" aria-label="Search and filters">
+        <input type="search" id="searchInput" placeholder="Search by title…" aria-label="Search by title">
+        <select id="subjectFilter" aria-label="Filter by subject"></select>
+        <select id="priorityFilter" aria-label="Filter by priority">
+          <option value="All">All priorities</option><option>Low</option><option>Medium</option><option>High</option>
+        </select>
+        <select id="statusFilter" aria-label="Filter by status">
+          <option value="All">All statuses</option><option>Pending</option><option>Completed</option>
+        </select>
+        <select id="sortSelect" aria-label="Sort assignments">
+          <option value="due">Sort: Upcoming deadline</option>
+          <option value="added">Sort: Recently added</option>
+        </select>
+        <button class="btn btn-ghost" id="clearFilters" type="button">Clear filters</button>
+      </section>
+
+      <section id="assignmentList" class="list" aria-live="polite"></section>
+      <div id="emptyState" class="empty" hidden></div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modal" hidden>
+    <form class="modal" id="assignmentForm" novalidate aria-labelledby="modalTitle">
+      <h2 id="modalTitle">New assignment</h2>
+      <label for="titleInput">Title</label>
+      <input type="text" id="titleInput" maxlength="80">
+      <p class="error" id="titleError"></p>
+
+      <label for="subjectInput">Subject</label>
+      <input type="text" id="subjectInput" maxlength="40">
+      <p class="error" id="subjectError"></p>
+
+      <label for="dueInput">Due date</label>
+      <input type="date" id="dueInput">
+      <p class="error" id="dueError"></p>
+
+      <label for="priorityInput">Priority</label>
+      <select id="priorityInput"><option>Low</option><option selected>Medium</option><option>High</option></select>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="cancelModal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save assignment</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
